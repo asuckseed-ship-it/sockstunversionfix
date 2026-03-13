@@ -78,6 +78,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		// Refresh UI state every time the user returns to this Activity
+		// (e.g. switching back from another app tab in MuMu/emulator multitab)
+		updateUI();
+	}
+
+	@Override
 	protected void onActivityResult(int request, int result, Intent data) {
 		if ((result == RESULT_OK) && prefs.getEnable()) {
 			Intent intent = new Intent(this, TProxyService.class);
