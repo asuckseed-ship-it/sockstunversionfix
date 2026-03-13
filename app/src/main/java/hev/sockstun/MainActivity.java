@@ -80,9 +80,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// Refresh UI state every time the user returns to this Activity
-		// (e.g. switching back from another app tab in MuMu/emulator multitab)
 		updateUI();
+	}
+
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		// MuMu multitab triggers window focus change instead of lifecycle events
+		if (hasFocus) {
+			updateUI();
+		}
 	}
 
 	@Override
